@@ -6,6 +6,11 @@ import { db } from './data/db';
 function App() {
 	/* ----- state ----- */
 	const [data, setData] = useState(db);
+	const [cart, setCart] = useState([]);
+
+	const addToCart = (guitar) => {
+		setCart([...cart, guitar]);
+	};
 
 	return (
 		<>
@@ -20,6 +25,7 @@ function App() {
 							<Guitar
 								key={item.id}
 								guitar={item}
+								addToCart={addToCart}
 							/>
 						);
 					})}

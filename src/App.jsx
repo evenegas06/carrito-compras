@@ -8,8 +8,25 @@ function App() {
 	const [data, setData] = useState(db);
 	const [cart, setCart] = useState([]);
 
-	const addToCart = (guitar) => {
-		setCart([...cart, guitar]);
+	const addToCart = (item) => {
+		const item_exists = cart.findIndex((cart_item) => {
+			return cart_item.id === item.id;
+		});
+
+		if (item_exists >= 0) {
+			const update_cart = [...cart]; // copy of state
+
+			update_cart[item_exists].quantity++;
+
+			setCart(update_cart);
+		} else {
+			item.quantity = 1;
+			setCart([...cart, item]);
+		}
+
+		console.log(item_exists);
+
+		setCart([...cart, item]);
 	};
 
 	return (

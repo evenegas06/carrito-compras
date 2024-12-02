@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-const Header = ({ cart }) => {
+const Header = ({ cart, removeFromCart }) => {
 	// state derivado
 	//const isCartEmpty = () => cart.length === 0;
 
@@ -12,6 +12,7 @@ const Header = ({ cart }) => {
 
 	// useMemo
 	const isCartEmpty = useMemo(() => cart.length === 0, [cart]);
+
 	const cartTotal = useMemo(() => {
 		return cart.reduce((carry, item) => {
 			return carry + item.quantity * item.price;
@@ -91,6 +92,7 @@ const Header = ({ cart }) => {
 																<button
 																	className="btn btn-danger"
 																	type="button"
+																	onClick={() => removeFromCart(item.id)}
 																>
 																	X
 																</button>

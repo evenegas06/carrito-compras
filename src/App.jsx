@@ -8,12 +8,21 @@ function App() {
 	const [data, setData] = useState(db);
 	const [cart, setCart] = useState([]);
 
+	const MAX_QUANTITY = 5;
+	const MIN_QUANTITY = 1;
+
+	/**
+	 *
+	 * @param {object} item
+	 */
 	const addToCart = (item) => {
 		const item_exists = cart.findIndex((cart_item) => {
 			return cart_item.id === item.id;
 		});
 
 		if (item_exists >= 0) {
+			if (cart[item_exists].quantity >= MAX_QUANTITY) return;
+			
 			const update_cart = [...cart]; // copy of state
 
 			update_cart[item_exists].quantity++;
@@ -25,8 +34,53 @@ function App() {
 		}
 	};
 
+	/**
+	 * Remove item from cart state.
+	 *
+	 * @param {int} id
+	 */
 	const removeFromCart = (id) => {
 		setCart(cart.filter((guitar) => guitar.id !== id));
+	};
+
+	/**
+	 * Increase item quantity.
+	 *
+	 * @param {int} id
+	 */
+	const increaseQuantity = (id) => {
+		const update_cart = cart.map((item) => {
+			if (item.id === id && item.quantity < MAX_QUANTITY) {
+				return {
+					...item,
+					quantity: item.quantity + 1,
+				};
+			}
+
+			return item;
+		});
+
+		setCart(update_cart);
+	};
+
+	/**
+	 * Decrease item quantity.
+	 *
+	 * @param {int} id
+	 */
+	const decreaseQuantity = (id) => {
+		const update_cart = cart.map((item) => {
+			if (item.id === id && item.quantity > MIN_QUANTITY) {
+				return {
+					...item,
+					quantity: item.quantity - 1,
+				};
+			}
+
+			return item;
+		});
+
+		setCart(update_cart);
 	};
 
 	return (
@@ -34,6 +88,8 @@ function App() {
 			<Header
 				cart={cart}
 				removeFromCart={removeFromCart}
+				increaseQuantity={increaseQuantity}
+				decreaseQuantity={decreaseQuantity}
 			/>
 
 			<main className="container-xl mt-5">

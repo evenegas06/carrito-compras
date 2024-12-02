@@ -23,29 +23,23 @@ function App() {
 			item.quantity = 1;
 			setCart([...cart, item]);
 		}
-
-		console.log(item_exists);
-
-		setCart([...cart, item]);
 	};
 
 	return (
 		<>
-			<Header />
+			<Header cart={cart} />
 
 			<main className="container-xl mt-5">
 				<h2 className="text-center">Nuestra Colección</h2>
 
 				<div className="row mt-5">
-					{data.map((item) => {
-						return (
-							<Guitar
-								key={item.id}
-								guitar={item}
-								addToCart={addToCart}
-							/>
-						);
-					})}
+					{data.map((item) => (
+						<Guitar
+							key={item.id}
+							guitar={item}
+							addToCart={addToCart}
+						/>
+					))}
 				</div>
 			</main>
 

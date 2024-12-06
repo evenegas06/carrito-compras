@@ -5,6 +5,7 @@ const Header = ({
 	removeFromCart,
 	increaseQuantity,
 	decreaseQuantity,
+	clearCart,
 }) => {
 	// state derivado
 	//const isCartEmpty = () => cart.length === 0;
@@ -117,7 +118,10 @@ const Header = ({
 									</>
 								)}
 
-								<button className="btn btn-dark w-100 mt-3 p-2">
+								<button
+									className="btn btn-dark w-100 mt-3 p-2"
+									onClick={clearCart}
+								>
 									Vaciar Carrito
 								</button>
 							</div>

@@ -22,7 +22,7 @@ function App() {
 
 		if (item_exists >= 0) {
 			if (cart[item_exists].quantity >= MAX_QUANTITY) return;
-			
+
 			const update_cart = [...cart]; // copy of state
 
 			update_cart[item_exists].quantity++;
@@ -83,6 +83,13 @@ function App() {
 		setCart(update_cart);
 	};
 
+	/**
+	 *
+	 */
+	const clearCart = () => {
+		setCart([]);
+	};
+
 	return (
 		<>
 			<Header
@@ -90,6 +97,7 @@ function App() {
 				removeFromCart={removeFromCart}
 				increaseQuantity={increaseQuantity}
 				decreaseQuantity={decreaseQuantity}
+				clearCart={clearCart}
 			/>
 
 			<main className="container-xl mt-5">

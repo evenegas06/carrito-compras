@@ -6,7 +6,10 @@ const Header = ({
 	increaseQuantity,
 	decreaseQuantity,
 	clearCart,
+	isCartEmpty,
+	cartTotal
 }) => {
+
 	// state derivado
 	//const isCartEmpty = () => cart.length === 0;
 
@@ -15,15 +18,6 @@ const Header = ({
 	// 		return carry + item.quantity * item.price;
 	// 	}, 0);
 	// };
-
-	// useMemo
-	const isCartEmpty = useMemo(() => cart.length === 0, [cart]);
-
-	const cartTotal = useMemo(() => {
-		return cart.reduce((carry, item) => {
-			return carry + item.quantity * item.price;
-		}, 0);
-	}, [cart]);
 
 	return (
 		<header className="py-5 header">
